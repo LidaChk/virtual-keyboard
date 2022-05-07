@@ -55,11 +55,13 @@ const keyBoard = new Keyboard();
 
 textarea.addEventListener('keydown', (e) => {
   keyBoard.activatekey(e.code);
+
   // textarea.value += `'${e.code}',`;
   // e.preventDefault();
 });
 textarea.addEventListener('keyup', (e) => {
   keyBoard.deactivatekey(e.code);
+
   // textarea.value += e.code;
   // e.preventDefault();
 });
