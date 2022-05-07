@@ -1,4 +1,4 @@
 import './sass/main.scss';
 import './keyborad';
 
-document.addEventListener('click', (e) => { document.querySelector('textarea').focus(); });
+document.addEventListener('click', () => { document.querySelector('textarea').focus(); });

@@ -11,5 +11,11 @@ export default class Button {
     this.key = label;
     this.label = label;
     this.type = type; // key|func
+    this.isPressed = false;
+  }
+
+  changeLabel(newLabel) {
+    this.element.innerHTML = newLabel;
+    this.label = newLabel;
   }
 }
