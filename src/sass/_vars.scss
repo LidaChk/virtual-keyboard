@@ -1,0 +1,18 @@
+@import "./rosely_vars.scss";
+
+$font-size: $font-size-base;
+$font-color: $rosely1;
+
+$primary-light: $roselyA;
+$primary: $rosely9;
+$primary-dark: darken($primary, 5%);
+
+$white: #ffffff;
+$greyLight-1: $rosely3;
+$greyLight-2: $rosely7;
+$greyLight-3: $gray-400;
+$greyDark: $rosely8;
+
+$shadow: 0.3rem 0.3rem 0.6rem $greyLight-2, -0.2rem -0.2rem 0.5rem $white;
+$inner-shadow: inset 0.2rem 0.2rem 0.5rem $greyLight-2,
+  inset -0.2rem -0.2rem 0.5rem $white;
