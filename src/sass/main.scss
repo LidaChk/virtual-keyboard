@@ -1,4 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@500&display=swap");
 @import "./rosely_vars.scss";
-body {
-  background-color: $rosely5;
-}
+
+@import "./_page.scss";
+@import "./_input.scss";
+@import "./_keyboard.scss";
