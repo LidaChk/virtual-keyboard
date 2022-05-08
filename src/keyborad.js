@@ -11,7 +11,9 @@ export default class Keyboard {
     this.btns = [];
     this.capsed = false;
     this.shifted = false;
+    this.alted = false;
     this.lang = 'Eng';
+    this.langs = ['Eng', 'Rus'];
 
     Object.keys(keyboardMap).forEach((key) => {
       const line = document.createElement('div');
@@ -27,8 +29,13 @@ export default class Keyboard {
     document.querySelector('.components').appendChild(this.element);
   }
 
+  switchLang() {
+    this.lang = this.langs.pop();
+    this.langs.unshift(this.lang);
+    console.log(this.langs);
+  }
+
   activatekey(code) {
-    // this.element.querySelector(`#${code}`).classList.add('btn--active');
     const btn = this.btns.find((b) => b.code === code);
     if (btn) btn.element.classList.add('btn--active');
     if (code === 'CapsLock' && !btn.isPressed) {
@@ -40,12 +47,20 @@ export default class Keyboard {
     if (code.slice(0, 5) === 'Shift' && !btn.isPressed) {
       this.shifted = !this.shifted;
       btn.isPressed = true;
+      if (this.alted) { this.switchLang(); }
       this.initLang();
+    }
+    if (code.slice(0, 3) === 'Alt' && !btn.isPressed) {
+      this.alted = !this.alted;
+      btn.isPressed = true;
+      if (this.shifted) {
+        this.switchLang();
+        this.initLang();
+      }
     }
   }
 
   deactivatekey(code) {
-    // this.element.querySelector(`#${code}`).classList.remove('btn--active');
     const btn = this.btns.find((b) => b.code === code);
     if (btn) btn.element.classList.remove('btn--active');
     if (code === 'CapsLock') {
@@ -55,6 +70,10 @@ export default class Keyboard {
       this.shifted = !this.shifted;
       btn.isPressed = false;
       this.initLang();
+    }
+    if (code.slice(0, 3) === 'Alt' && btn.isPressed) {
+      this.alted = !this.alted;
+      btn.isPressed = false;
     }
   }
 
