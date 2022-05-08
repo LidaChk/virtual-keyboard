@@ -8,8 +8,6 @@
 .line-container {
   width: 80rem;
   display: flex;
-  //justify-content: space-between;
-  //align-items: ;
   flex-direction: row;
   gap: 0.7rem;
 }
@@ -61,8 +59,8 @@
 }
 .btn--Func.btn--active {
   color: $rosely3;
-  box-shadow: inset 0.2rem 0.2rem 0.5rem $roselyA,
-    inset -0.2rem -0.2rem 0.5rem $white;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem darken($rosely9, 20%),
+    inset -0.2rem -0.2rem 0.5rem lighten($rosely9, 20%);
 }
 .material-symbols-outlined {
   font-size: calc(2 * min(16px, 1vw));
@@ -74,4 +72,11 @@
 .capsed.btn--Func:active {
   box-shadow: inset 0.2rem 0.2rem 0.5rem darken($roselyB, 20%),
     inset -0.2rem -0.2rem 0.5rem lighten($roselyB, 10%);
+}
+.btn.btn--Arrow {
+  font-family: "Inter", sans-serif;
+}
+
+big {
+  font-size: 2rem;
 }
