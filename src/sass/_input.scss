@@ -1,9 +1,6 @@
 /*  FORM  */
 .form {
   &__input {
-    //width: 70rem;
-    //height: 30rem;
-    //height: fit-content;
     resize: none;
     border: none;
     border-radius: 1rem;
@@ -21,7 +18,6 @@
     }
     &:focus {
       outline: none;
-      //box-shadow: $shadow;
     }
   }
 }

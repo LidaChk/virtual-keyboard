@@ -10,13 +10,11 @@
 
 html {
   box-sizing: border-box;
-  font-size: min(16px, 1vw); // 1rem = 10px    100% = 16px
+  font-size: min(16px, 1vw);
   overflow-y: scroll;
   background: $greyLight-1;
+
   font-family: "Overpass Mono", monospace;
-  /*   @media screen and (min-width: 900px) {
-    font-size: 75%;
-  } */
 }
 
 .container {
