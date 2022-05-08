@@ -1,8 +1,7 @@
 import Button from './btn';
 import layouts from './layouts';
 import keyboardMap from './keyboardmap';
-
-const textarea = document.querySelector('.form__input');
+import bodyTemplate from './templates';
 
 export default class Keyboard {
   constructor() {
@@ -26,7 +25,36 @@ export default class Keyboard {
       });
       this.element.appendChild(line);
     });
+
+    document.body.innerHTML = bodyTemplate;
+    this.textarea = document.querySelector('.form__input');
+
     document.querySelector('.components').appendChild(this.element);
+    this.addEvents();
+    console.log(this.btns);
+  }
+
+  addEvents() {
+    document.addEventListener('click', () => { this.textarea.focus(); });
+
+    this.element.addEventListener('click', (e) => {
+      const key = e.target.closest('.btn');
+      if (key) {
+        this.activatekey(key.id);
+        this.deactivatekey(key.id);
+      }
+    });
+
+    this.textarea.addEventListener('keydown', (e) => {
+      this.activatekey(e.code);
+
+      e.preventDefault();
+    });
+    this.textarea.addEventListener('keyup', (e) => {
+      this.deactivatekey(e.code);
+
+      e.preventDefault();
+    });
   }
 
   switchLang() {
@@ -89,16 +117,4 @@ export default class Keyboard {
 }
 
 const keyBoard = new Keyboard();
-
 keyBoard.initLang();
-
-textarea.addEventListener('keydown', (e) => {
-  keyBoard.activatekey(e.code);
-
-  e.preventDefault();
-});
-textarea.addEventListener('keyup', (e) => {
-  keyBoard.deactivatekey(e.code);
-
-  e.preventDefault();
-});
