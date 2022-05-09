@@ -9,7 +9,7 @@ const isProduction = process.env.NODE_ENV; //== "production";
 const config = {
   entry: ["./src/index.js", "./src/sass/main.scss"],
   output: {
-    path: !isProduction? path.resolve(__dirname, "dist") : path.resolve(__dirname, "page"),
+    path: !isProduction? path.resolve(__dirname, "dist") : path.resolve(__dirname, "pages/page"),
     filename: 'bundle.js'
   },
   devServer: {
