@@ -13,7 +13,7 @@ const keyboardMap = {
   line2: ['Tab:Func:1.5:Tab&#8239;<big>&#11120;</big>', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash:key:1.5', 'None:FunFunc'],
   line3: ['CapsLock:Func:1.75:CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', `Enter:Func:2.25:${Enter}`, 'None:FunFunc'],
   line4: [`ShiftLeft:Func:2.25:${Shift}`, 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma:key', 'Period:key', 'Slash:key', `ShiftRight:Func:1.75:${Shift}`, `ArrowUp:Arrow:1:${ArrowUp}`, 'None:FunFunc'],
-  line5: ['ControlLeft:Func:1.5:Ctrl', `MetaLeft:Func:1:${winKey}`, 'AltLeft:Func:1:Alt', 'Space:space:7.5', 'AltRight:Func:1:Alt', 'ControlRight:Func:1:Ctrl', `ArrowLeft:Arrow:1:${ArrowLeft}`, `ArrowDown:Arrow:1:${ArrowDown}`, `ArrowRight:Arrow:1:${ArrowRight}`],
+  line5: ['ControlLeft:Func:1.5:Ctrl', `MetaLeft:Func:1:${winKey}`, 'AltLeft:Func:1:Alt', 'Space:Space:7.5:', 'AltRight:Func:1:Alt', 'ControlRight:Func:1:Ctrl', `ArrowLeft:Arrow:1:${ArrowLeft}`, `ArrowDown:Arrow:1:${ArrowDown}`, `ArrowRight:Arrow:1:${ArrowRight}`],
 };
 
 export default keyboardMap;
