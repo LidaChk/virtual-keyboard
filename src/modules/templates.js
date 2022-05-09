@@ -2,11 +2,12 @@ const bodyTemplate = {
   container: `  <div class="container">
   <div class="components">
     <div class="form">
-      <textarea autofocus type="text" rows="10" class="form__input" placeholder="Type anything..."
+      <textarea autofocus type="text" class="form__input" placeholder="Type anything..."
         tabindex="-1"></textarea>
     </div>
     <div class="info">Клавиатура создана в операционной системе Windows<br>
-      Для переключения языка комбинация: левыe shift + alt</div>
+      Для переключения языка комбинация: левыe shift + alt<br>
+      Иконочные шрифты только для английской раскладки</div>
     <footer class="footer ">
         <ul class="footer-list">
           <li class="footer-item footer-text">© 2022</li>

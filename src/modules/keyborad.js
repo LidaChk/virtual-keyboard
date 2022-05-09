@@ -7,6 +7,7 @@ export default class Keyboard {
   constructor() {
     this.element = document.createElement('div');
     this.element.classList.add('keyborad-container');
+    this.mode = 'letters';
     this.btns = {};
     this.capsed = false;
     this.shifted = false;
@@ -61,12 +62,10 @@ export default class Keyboard {
     });
 
     this.textarea.addEventListener('keydown', (e) => {
-      this.activatekey(e.code);
-      e.preventDefault();
+      if (this.activatekey(e.code)) e.preventDefault();
     });
     this.textarea.addEventListener('keyup', (e) => {
-      this.deactivatekey(e.code);
-      e.preventDefault();
+      if (this.deactivatekey(e.code)) e.preventDefault();
     });
   }
 
@@ -81,52 +80,55 @@ export default class Keyboard {
     const start = this.textarea.selectionStart;
     const end = this.textarea.selectionEnd;
     const { value } = this.textarea;
-    if (btn) {
-      btn.element.classList.add('btn--active');
-      if (code === 'CapsLock' && !btn.isPressed) {
-        this.capsed = !this.capsed;
-        btn.element.classList.toggle('capsed');
-        btn.isPressed = true;
+    if (!btn) return false;
+    btn.element.classList.add('btn--active');
+    if (code === 'CapsLock' && !btn.isPressed) {
+      this.capsed = !this.capsed;
+      btn.element.classList.toggle('capsed');
+      btn.isPressed = true;
+      this.initLang();
+    } else if (code.slice(0, 5) === 'Shift' && !btn.isPressed) {
+      this.shifted = !this.shifted;
+      btn.isPressed = true;
+      if (this.alted) { this.switchLang(); }
+      this.initLang();
+    } else if (code.slice(0, 3) === 'Alt' && !btn.isPressed) {
+      this.alted = !this.alted;
+      btn.isPressed = true;
+      if (this.shifted) {
+        this.switchLang();
         this.initLang();
-      } else if (code.slice(0, 5) === 'Shift' && !btn.isPressed) {
-        this.shifted = !this.shifted;
-        btn.isPressed = true;
-        if (this.alted) { this.switchLang(); }
-        this.initLang();
-      } else if (code.slice(0, 3) === 'Alt' && !btn.isPressed) {
-        this.alted = !this.alted;
-        btn.isPressed = true;
-        if (this.shifted) {
-          this.switchLang();
-          this.initLang();
-        }
-      } else if (code === 'Enter') {
-        this.textarea.value += '\n';
-      } else if (code === 'Tab') {
-        this.textarea.value += '\t';
-      } else if (code === 'Backspace' || code === 'Delete') {
-        if (end > start) {
-          this.textarea.value = `${value.slice(0, start)}${value.slice(end)}`;
-          this.textarea.selectionEnd = start;
-        } else if (code === 'Backspace') {
-          this.textarea.value = `${value.slice(0, start - 1)}${value.slice(end)}`;
-          this.textarea.selectionEnd = start - 1;
-        } else if (code === 'Delete') {
-          this.textarea.value = `${value.slice(0, start)}${value.slice(end + 1)}`;
-          this.textarea.selectionEnd = start;
-        }
-      } else if (btn.type === 'Space') {
-        this.textarea.value = `${value.slice(0, start)} ${value.slice(end)}`;
-        this.textarea.selectionEnd = start + 1;
-      } else if (btn.type === 'key' || btn.type === 'Arrow') {
-        this.textarea.value = `${value.slice(0, start)}${btn.label}${value.slice(end)}`;
-        this.textarea.selectionEnd = start + 1;
       }
+    } else if (code === 'Enter') {
+      this.textarea.value += '\n';
+    } else if (code === 'Tab') {
+      this.textarea.value += '\t';
+    } else if (code === 'Backspace' || code === 'Delete') {
+      if (end > start) {
+        this.textarea.value = `${value.slice(0, start)}${value.slice(end)}`;
+        this.textarea.selectionEnd = start;
+      } else if (code === 'Backspace') {
+        this.textarea.value = `${value.slice(0, start - 1)}${value.slice(end)}`;
+        this.textarea.selectionEnd = start - 1;
+      } else if (code === 'Delete') {
+        this.textarea.value = `${value.slice(0, start)}${value.slice(end + 1)}`;
+        this.textarea.selectionEnd = start;
+      }
+    } else if (btn.type === 'Space') {
+      this.textarea.value = `${value.slice(0, start)} ${value.slice(end)}`;
+      this.textarea.selectionEnd = start + 1;
+    } else if (btn.type === 'key' || btn.type === 'Arrow') {
+      this.textarea.value = `${value.slice(0, start)}${btn.label}${value.slice(end)}`;
+      this.textarea.selectionEnd = start + 1;
+    } else if (btn.type === 'kitty' || btn.type === 'poopies' || btn.type === 'letters') {
+      if (btn.type !== this.mode) this.toggleMode(btn.type);
     }
+    return true;
   }
 
   deactivatekey(code) {
     const btn = this.btns[code];
+    if (!btn) return false;
     if (btn) btn.element.classList.remove('btn--active');
     if (code === 'CapsLock') {
       btn.isPressed = false;
@@ -138,6 +140,7 @@ export default class Keyboard {
       this.alted = !this.alted;
       btn.isPressed = false;
     }
+    return true;
   }
 
   initLang() {
@@ -147,6 +150,25 @@ export default class Keyboard {
     keys.filter((b) => this.btns[b].type === 'key').forEach((b) => {
       if (this.capsed && this.shifted && b.slice(0, 3) === 'Key') { this.btns[b].changeLabel(lay[b].toLowerCase()); } else if (this.capsed && !this.shifted && b.slice(0, 3) === 'Key') { this.btns[b].changeLabel(lay[b].toUpperCase()); } else this.btns[b].changeLabel(lay[b]);
     });
+  }
+
+  toggleMode(mode) {
+    this.textarea.classList.remove('poopies');
+    this.textarea.classList.remove('kitty');
+    if (mode !== 'letters') this.textarea.classList.add(mode);
+
+    const keys = Object.keys(this.btns);
+    keys.filter((b) => this.btns[b].type === 'key').forEach((b) => {
+      this.btns[b].element.classList.remove('poopies');
+      this.btns[b].element.classList.remove('kitty');
+      if (mode !== 'letters') this.btns[b].element.classList.add(mode);
+    });
+    this.btns.letters.element.classList.remove('btn--magic');
+    this.btns.kitty.element.classList.remove('btn--magic');
+    this.btns.poopies.element.classList.remove('btn--magic');
+    console.log(this.btns);
+    this.btns[mode].element.classList.add('btn--magic');
+    this.mode = mode;
   }
 }
 

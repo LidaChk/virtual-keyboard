@@ -37,8 +37,18 @@ const config = {
         use: [miniCss.loader, "css-loader", "sass-loader"],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: "asset",
+        test: /\.(jpe?g|png|gif|svg|ico)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/svg/[name][ext]'
+        }
+      },
+      {
+        test: /\.(woff|woff2|ttf|otf|eot)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext]'
+        }
       },
 
       // Add your rules for custom modules here
