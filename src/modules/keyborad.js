@@ -11,12 +11,11 @@ export default class Keyboard {
     this.capsed = false;
     this.shifted = false;
     this.alted = false;
-    this.lang = 'Eng';
-    this.langs = ['Eng', 'Rus'];
-    this.mousePressedCode = '';
+    if (localStorage.getItem('rosely-vkb-lang') === null) localStorage.setItem('rosely-vkb-lang', 'Eng');
+    this.lang = localStorage.getItem('rosely-vkb-lang');
+    this.langs = this.lang === 'Eng' ? ['Eng', 'Rus'] : ['Rus', 'Eng'];
 
-    if (!localStorage.getItem('rosely-vkb-lang')) localStorage.setItem('rosely-vkb-lang', 'Eng');
-    this.switchLang();
+    this.mousePressedCode = '';
 
     Object.keys(keyboardMap).forEach((key) => {
       const line = document.createElement('div');
@@ -82,45 +81,47 @@ export default class Keyboard {
     const start = this.textarea.selectionStart;
     const end = this.textarea.selectionEnd;
     const { value } = this.textarea;
-    if (btn) btn.element.classList.add('btn--active');
-    if (code === 'CapsLock' && !btn.isPressed) {
-      this.capsed = !this.capsed;
-      btn.element.classList.toggle('capsed');
-      btn.isPressed = true;
-      this.initLang();
-    } else if (code.slice(0, 5) === 'Shift' && !btn.isPressed) {
-      this.shifted = !this.shifted;
-      btn.isPressed = true;
-      if (this.alted) { this.switchLang(); }
-      this.initLang();
-    } else if (code.slice(0, 3) === 'Alt' && !btn.isPressed) {
-      this.alted = !this.alted;
-      btn.isPressed = true;
-      if (this.shifted) {
-        this.switchLang();
+    if (btn) {
+      btn.element.classList.add('btn--active');
+      if (code === 'CapsLock' && !btn.isPressed) {
+        this.capsed = !this.capsed;
+        btn.element.classList.toggle('capsed');
+        btn.isPressed = true;
         this.initLang();
+      } else if (code.slice(0, 5) === 'Shift' && !btn.isPressed) {
+        this.shifted = !this.shifted;
+        btn.isPressed = true;
+        if (this.alted) { this.switchLang(); }
+        this.initLang();
+      } else if (code.slice(0, 3) === 'Alt' && !btn.isPressed) {
+        this.alted = !this.alted;
+        btn.isPressed = true;
+        if (this.shifted) {
+          this.switchLang();
+          this.initLang();
+        }
+      } else if (code === 'Enter') {
+        this.textarea.value += '\n';
+      } else if (code === 'Tab') {
+        this.textarea.value += '\t';
+      } else if (code === 'Backspace' || code === 'Delete') {
+        if (end > start) {
+          this.textarea.value = `${value.slice(0, start)}${value.slice(end)}`;
+          this.textarea.selectionEnd = start;
+        } else if (code === 'Backspace') {
+          this.textarea.value = `${value.slice(0, start - 1)}${value.slice(end)}`;
+          this.textarea.selectionEnd = start - 1;
+        } else if (code === 'Delete') {
+          this.textarea.value = `${value.slice(0, start)}${value.slice(end + 1)}`;
+          this.textarea.selectionEnd = start;
+        }
+      } else if (btn.type === 'Space') {
+        this.textarea.value = `${value.slice(0, start)} ${value.slice(end)}`;
+        this.textarea.selectionEnd = start + 1;
+      } else if (btn.type === 'key' || btn.type === 'Arrow') {
+        this.textarea.value = `${value.slice(0, start)}${btn.label}${value.slice(end)}`;
+        this.textarea.selectionEnd = start + 1;
       }
-    } else if (code === 'Enter') {
-      this.textarea.value += '\n';
-    } else if (code === 'Tab') {
-      this.textarea.value += '\t';
-    } else if (code === 'Backspace' || code === 'Delete') {
-      if (end > start) {
-        this.textarea.value = `${value.slice(0, start)}${value.slice(end)}`;
-        this.textarea.selectionEnd = start;
-      } else if (code === 'Backspace') {
-        this.textarea.value = `${value.slice(0, start - 1)}${value.slice(end)}`;
-        this.textarea.selectionEnd = start - 1;
-      } else if (code === 'Delete') {
-        this.textarea.value = `${value.slice(0, start)}${value.slice(end + 1)}`;
-        this.textarea.selectionEnd = start;
-      }
-    } else if (btn.type === 'Space') {
-      this.textarea.value = `${value.slice(0, start)} ${value.slice(end)}`;
-      this.textarea.selectionEnd = start + 1;
-    } else if (btn.type === 'key' || btn.type === 'Arrow') {
-      this.textarea.value = `${value.slice(0, start)}${btn.label}${value.slice(end)}`;
-      this.textarea.selectionEnd = start + 1;
     }
   }
 
