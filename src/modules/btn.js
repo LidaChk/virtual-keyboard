@@ -11,7 +11,7 @@ export default class Button {
     this.code = code;
     this.key = label;
     this.label = label;
-    this.type = type; // key|func
+    this.type = type;
     this.isPressed = false;
   }
 

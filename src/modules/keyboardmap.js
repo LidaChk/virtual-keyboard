@@ -7,7 +7,7 @@ const ArrowUp = '▲';
 const ArrowDown = '▼';
 const Shift = '&#8679; Shift';
 const Enter = 'Enter&#8239;<big>&#8629;</big>';
-/* TODO: поменять иконки шифтови ентер и бекспейс */
+
 const keyboardMap = {
   line1: ['Backquote:key', 'Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5', 'Digit6', 'Digit7', 'Digit8', 'Digit9', 'Digit0', 'Minus', 'Equal', 'Backspace:Func:2:<big>⟵</big>&#8239;Backspace', 'Delete:Func:1:Del'],
   line2: ['Tab:Func:1.5:Tab&#8239;<big>&#11120;</big>', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash:key:1.5', 'letters:letters::Aa'],

@@ -33,9 +33,8 @@ export default class Keyboard {
     document.body.innerHTML = bodyTemplate.container;
     this.textarea = document.querySelector('.form__input');
 
-    // document.querySelector('.components').appendChild(this.element);
     document.querySelector('.form').after(this.element);
-    // document.querySelector('.components').append(bodyTemplate.info);
+
     this.addEvents();
   }
 

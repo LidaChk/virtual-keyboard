@@ -24,5 +24,6 @@ const bodyTemplate = {
         </ul>
   </div>
 </div>`,
+
 };
 export default bodyTemplate;
