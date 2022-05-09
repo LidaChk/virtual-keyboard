@@ -145,7 +145,6 @@ export default class Keyboard {
 
   initLang() {
     const lay = layouts.find((l) => l.lang === this.lang && l.shifted === this.shifted).layout;
-    console.log(this.shifted);
     const keys = Object.keys(this.btns);
     keys.filter((b) => this.btns[b].type === 'key').forEach((b) => {
       if (this.capsed && this.shifted && b.slice(0, 3) === 'Key') { this.btns[b].changeLabel(lay[b].toLowerCase()); } else if (this.capsed && !this.shifted && b.slice(0, 3) === 'Key') { this.btns[b].changeLabel(lay[b].toUpperCase()); } else this.btns[b].changeLabel(lay[b]);
@@ -166,7 +165,6 @@ export default class Keyboard {
     this.btns.letters.element.classList.remove('btn--magic');
     this.btns.kitty.element.classList.remove('btn--magic');
     this.btns.poopies.element.classList.remove('btn--magic');
-    console.log(this.btns);
     this.btns[mode].element.classList.add('btn--magic');
     this.mode = mode;
   }
