@@ -15,6 +15,9 @@ export default class Keyboard {
     this.langs = ['Eng', 'Rus'];
     this.mousePressedCode = '';
 
+    if (!localStorage.getItem('rosely-vkb-lang')) localStorage.setItem('rosely-vkb-lang', 'Eng');
+    this.switchLang();
+
     Object.keys(keyboardMap).forEach((key) => {
       const line = document.createElement('div');
       line.classList.add('line-container');
@@ -27,10 +30,12 @@ export default class Keyboard {
       this.element.appendChild(line);
     });
 
-    document.body.innerHTML = bodyTemplate;
+    document.body.innerHTML = bodyTemplate.container;
     this.textarea = document.querySelector('.form__input');
 
-    document.querySelector('.components').appendChild(this.element);
+    // document.querySelector('.components').appendChild(this.element);
+    document.querySelector('.form').after(this.element);
+    // document.querySelector('.components').append(bodyTemplate.info);
     this.addEvents();
   }
 
@@ -69,11 +74,14 @@ export default class Keyboard {
   switchLang() {
     this.lang = this.langs.pop();
     this.langs.unshift(this.lang);
-    console.log(this.langs);
+    localStorage.setItem('rosely-vkb-lang', this.lang);
   }
 
   activatekey(code) {
     const btn = this.btns[code];
+    const start = this.textarea.selectionStart;
+    const end = this.textarea.selectionEnd;
+    const { value } = this.textarea;
     if (btn) btn.element.classList.add('btn--active');
     if (code === 'CapsLock' && !btn.isPressed) {
       this.capsed = !this.capsed;
@@ -97,22 +105,22 @@ export default class Keyboard {
     } else if (code === 'Tab') {
       this.textarea.value += '\t';
     } else if (code === 'Backspace' || code === 'Delete') {
-      const start = this.textarea.selectionStart;
-      const end = this.textarea.selectionEnd;
-      const { value } = this.textarea;
       if (end > start) {
-        console.log(end, start);
-        this.textarea.value = value.slice(0, start) + value.slice(end);
+        this.textarea.value = `${value.slice(0, start)}${value.slice(end)}`;
         this.textarea.selectionEnd = start;
       } else if (code === 'Backspace') {
-        this.textarea.value = value.slice(0, start - 1) + value.slice(end);
+        this.textarea.value = `${value.slice(0, start - 1)}${value.slice(end)}`;
         this.textarea.selectionEnd = start - 1;
       } else if (code === 'Delete') {
-        this.textarea.value = value.slice(0, start) + value.slice(end + 1);
+        this.textarea.value = `${value.slice(0, start)}${value.slice(end + 1)}`;
         this.textarea.selectionEnd = start;
       }
+    } else if (btn.type === 'Space') {
+      this.textarea.value = `${value.slice(0, start)} ${value.slice(end)}`;
+      this.textarea.selectionEnd = start + 1;
     } else if (btn.type === 'key' || btn.type === 'Arrow') {
-      this.textarea.value += btn.label;
+      this.textarea.value = `${value.slice(0, start)}${btn.label}${value.slice(end)}`;
+      this.textarea.selectionEnd = start + 1;
     }
   }
 
