@@ -3,14 +3,7 @@ node_modules/
 package-lock.js
 .gitignore.bak
 
-<<<<<<< HEAD
 pages/
 dist/
 
 pages
-=======
-page/
-dist/
-
-pages/
->>>>>>> parent of a86c492 (Revert "Init: commit")

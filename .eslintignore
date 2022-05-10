@@ -4,5 +4,5 @@ node_modules
 
 /webpack.config.js
 dist
-page
+pages
 package.json
