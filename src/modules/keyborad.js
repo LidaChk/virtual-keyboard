@@ -45,6 +45,7 @@ export default class Keyboard {
         this.mousePressedCode = key.id;
         this.activatekey(key.id);
       }
+      e.preventDefault();
     });
     document.addEventListener('mouseup', (e) => {
       const key = e.target.closest('.btn');
@@ -59,6 +60,7 @@ export default class Keyboard {
         if (this.btns.ShiftRight.isPressed) { this.deactivatekey(this.btns.ShiftRight.code); }
         this.mousePressedCode = '';
       }
+      e.preventDefault();
     });
 
     document.addEventListener('keydown', (e) => {

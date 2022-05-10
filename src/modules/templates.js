@@ -5,9 +5,11 @@ const bodyTemplate = {
       <textarea autofocus type="text" class="form__input" placeholder="Type anything..."
         tabindex="-1"></textarea>
     </div>
-    <div class="info">Клавиатура создана в операционной системе Windows<br>
-      Для переключения языка комбинация: левыe shift + alt<br>
-      Иконочные шрифты только для английской раскладки</div>
+    <div class="info">Клавиатура создана в операционной системе Windows.<br>
+      Для переключения языка комбинация: левыe shift + alt;<br>
+      Зажать shift:  зажать пкм на  shift и увести курсор, отжать пкм.<br>
+      <br>
+      Иконочные шрифты только для английской раскладки.</div>
     <footer class="footer ">
         <ul class="footer-list">
           <li class="footer-item footer-text">© 2022</li>
