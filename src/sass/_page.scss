@@ -27,15 +27,11 @@ html {
 }
 
 .components {
-  //width: 75rem;
-  //height: 40rem;
   border-radius: 3rem;
   box-shadow: 0.8rem 0.8rem 1.4rem $greyLight-2, -0.2rem -0.2rem 1.8rem $white;
-  //padding: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  //justify-content: space-between;
   gap: 3rem;
   overflow: hidden;
 }
