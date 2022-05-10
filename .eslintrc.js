@@ -9,7 +9,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-console': ['error', { allow: [ 'error'] }],
     'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
   },
 };

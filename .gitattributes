@@ -1,3 +1,6 @@
 # Auto detect text files and perform LF normalization
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of a86c492 (Revert "Init: commit")
 * text=auto

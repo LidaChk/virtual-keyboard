@@ -39,8 +39,6 @@ export default class Keyboard {
   }
 
   addEvents() {
-    document.addEventListener('click', () => { this.textarea.focus(); });
-
     this.element.addEventListener('mousedown', (e) => {
       const key = e.target.closest('.btn');
       if (key) {
@@ -60,10 +58,10 @@ export default class Keyboard {
       }
     });
 
-    this.textarea.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e) => {
       if (this.activatekey(e.code)) e.preventDefault();
     });
-    this.textarea.addEventListener('keyup', (e) => {
+    document.addEventListener('keyup', (e) => {
       if (this.deactivatekey(e.code)) e.preventDefault();
     });
   }
@@ -80,6 +78,7 @@ export default class Keyboard {
     const end = this.textarea.selectionEnd;
     const { value } = this.textarea;
     if (!btn) return false;
+
     btn.element.classList.add('btn--active');
     if (code === 'CapsLock' && !btn.isPressed) {
       this.capsed = !this.capsed;
