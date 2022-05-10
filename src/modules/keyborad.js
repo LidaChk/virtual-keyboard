@@ -12,7 +12,7 @@ export default class Keyboard {
     this.capsed = false;
     this.shifted = false;
     this.alted = false;
-    if (localStorage.getItem('rosely-vkb-lang') === null) localStorage.setItem('rosely-vkb-lang', 'Eng');
+    if (localStorage.getItem('rosely-vkb-lang') === null) { localStorage.setItem('rosely-vkb-lang', 'Eng'); }
     this.lang = localStorage.getItem('rosely-vkb-lang');
     this.langs = this.lang === 'Eng' ? ['Eng', 'Rus'] : ['Rus', 'Eng'];
 
@@ -48,21 +48,30 @@ export default class Keyboard {
     });
     document.addEventListener('mouseup', (e) => {
       const key = e.target.closest('.btn');
-      if (this.mousePressedCode.slice(0, 5) === 'Shift' && (!key || key.id !== this.mousePressedCode)) {
+      if (
+        this.mousePressedCode.slice(0, 5) === 'Shift'
+        && (!key || key.id !== this.mousePressedCode)
+      ) {
         this.shifted = true;
       } else if (this.mousePressedCode !== '') {
         this.deactivatekey(this.mousePressedCode);
-        if (this.btns.ShiftLeft.isPressed) this.deactivatekey(this.btns.ShiftLeft.code);
-        if (this.btns.ShiftRight.isPressed) this.deactivatekey(this.btns.ShiftRight.code);
+        if (this.btns.ShiftLeft.isPressed) { this.deactivatekey(this.btns.ShiftLeft.code); }
+        if (this.btns.ShiftRight.isPressed) { this.deactivatekey(this.btns.ShiftRight.code); }
         this.mousePressedCode = '';
       }
     });
 
     document.addEventListener('keydown', (e) => {
       if (this.activatekey(e.code)) e.preventDefault();
+      else if (e.code.slice(0, 6) === 'Numpad') {
+        e.preventDefault();
+      }
     });
     document.addEventListener('keyup', (e) => {
       if (this.deactivatekey(e.code)) e.preventDefault();
+      else if (e.code.slice(0, 6) === 'Numpad') {
+        e.preventDefault();
+      }
     });
   }
 
@@ -88,7 +97,9 @@ export default class Keyboard {
     } else if (code.slice(0, 5) === 'Shift' && !btn.isPressed) {
       this.shifted = !this.shifted;
       btn.isPressed = true;
-      if (this.alted) { this.switchLang(); }
+      if (this.alted) {
+        this.switchLang();
+      }
       this.initLang();
     } else if (code.slice(0, 3) === 'Alt' && !btn.isPressed) {
       this.alted = !this.alted;
@@ -98,10 +109,15 @@ export default class Keyboard {
         this.initLang();
       }
     } else if (code === 'Enter') {
-      this.textarea.value += '\n';
+      this.textareafocus();
+      this.textarea.value = `${value.slice(0, start)}\n${value.slice(end)}`;
+      this.textarea.selectionEnd = start + 1;
     } else if (code === 'Tab') {
-      this.textarea.value += '\t';
+      this.textareafocus();
+      this.textarea.value = `${value.slice(0, start)}\t${value.slice(end)}`;
+      this.textarea.selectionEnd = start + 1;
     } else if (code === 'Backspace' || code === 'Delete') {
+      this.textareafocus();
       if (end > start) {
         this.textarea.value = `${value.slice(0, start)}${value.slice(end)}`;
         this.textarea.selectionEnd = start;
@@ -113,15 +129,29 @@ export default class Keyboard {
         this.textarea.selectionEnd = start;
       }
     } else if (btn.type === 'Space') {
+      this.textareafocus();
       this.textarea.value = `${value.slice(0, start)} ${value.slice(end)}`;
       this.textarea.selectionEnd = start + 1;
     } else if (btn.type === 'key' || btn.type === 'Arrow') {
-      this.textarea.value = `${value.slice(0, start)}${btn.label}${value.slice(end)}`;
+      this.textareafocus();
+      this.textarea.value = `${value.slice(0, start)}${btn.label}${value.slice(
+        end,
+      )}`;
       this.textarea.selectionEnd = start + 1;
-    } else if (btn.type === 'kitty' || btn.type === 'poopies' || btn.type === 'letters') {
+    } else if (
+      btn.type === 'kitty'
+      || btn.type === 'poopies'
+      || btn.type === 'letters'
+    ) {
       if (btn.type !== this.mode) this.toggleMode(btn.type);
     }
     return true;
+  }
+
+  textareafocus() {
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Windows Phone|Opera Mini/i.test(navigator.userAgent)) {
+      this.textarea.focus();
+    }
   }
 
   deactivatekey(code) {
@@ -142,11 +172,19 @@ export default class Keyboard {
   }
 
   initLang() {
-    const lay = layouts.find((l) => l.lang === this.lang && l.shifted === this.shifted).layout;
+    const lay = layouts.find(
+      (l) => l.lang === this.lang && l.shifted === this.shifted,
+    ).layout;
     const keys = Object.keys(this.btns);
-    keys.filter((b) => this.btns[b].type === 'key').forEach((b) => {
-      if (this.capsed && this.shifted && b.slice(0, 3) === 'Key') { this.btns[b].changeLabel(lay[b].toLowerCase()); } else if (this.capsed && !this.shifted && b.slice(0, 3) === 'Key') { this.btns[b].changeLabel(lay[b].toUpperCase()); } else this.btns[b].changeLabel(lay[b]);
-    });
+    keys
+      .filter((b) => this.btns[b].type === 'key')
+      .forEach((b) => {
+        if (this.capsed && this.shifted && b.slice(0, 3) === 'Key') {
+          this.btns[b].changeLabel(lay[b].toLowerCase());
+        } else if (this.capsed && !this.shifted && b.slice(0, 3) === 'Key') {
+          this.btns[b].changeLabel(lay[b].toUpperCase());
+        } else this.btns[b].changeLabel(lay[b]);
+      });
   }
 
   toggleMode(mode) {
@@ -155,11 +193,13 @@ export default class Keyboard {
     if (mode !== 'letters') this.textarea.classList.add(mode);
 
     const keys = Object.keys(this.btns);
-    keys.filter((b) => this.btns[b].type === 'key').forEach((b) => {
-      this.btns[b].element.classList.remove('poopies');
-      this.btns[b].element.classList.remove('kitty');
-      if (mode !== 'letters') this.btns[b].element.classList.add(mode);
-    });
+    keys
+      .filter((b) => this.btns[b].type === 'key')
+      .forEach((b) => {
+        this.btns[b].element.classList.remove('poopies');
+        this.btns[b].element.classList.remove('kitty');
+        if (mode !== 'letters') this.btns[b].element.classList.add(mode);
+      });
     this.btns.letters.element.classList.remove('btn--magic');
     this.btns.kitty.element.classList.remove('btn--magic');
     this.btns.poopies.element.classList.remove('btn--magic');
