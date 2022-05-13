@@ -7,7 +7,6 @@ p {
   text-decoration: none;
 }
 
-
 .footer {
   width: 100%;
   display: flex;
@@ -43,4 +42,9 @@ p {
 
 .footer-svg:hover {
   opacity: 0.9;
+}
+
+.footer-svg.footer-svg--rose {
+  filter: none;
+  height: 2.5rem;
 }

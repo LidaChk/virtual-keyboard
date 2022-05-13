@@ -75,6 +75,10 @@ export default class Keyboard {
         e.preventDefault();
       }
     });
+    document.querySelector('.link--switchlang').addEventListener('click', () => {
+      this.switchLang();
+      this.initLang();
+    });
   }
 
   switchLang() {
@@ -160,6 +164,9 @@ export default class Keyboard {
     const btn = this.btns[code];
     if (!btn) return false;
     if (btn) btn.element.classList.remove('btn--active');
+    if (code.slice(0, 5) === 'Shift') {
+      this.btns[code === 'ShiftLeft' ? 'ShiftRight' : 'ShiftLeft'].element.classList.remove('btn--active');
+    }
     if (code === 'CapsLock') {
       btn.isPressed = false;
     } else if (code.slice(0, 5) === 'Shift' && btn.isPressed) {

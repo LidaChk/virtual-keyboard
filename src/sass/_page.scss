@@ -8,7 +8,6 @@
   box-sizing: inherit;
 }
 
-
 html {
   box-sizing: border-box;
   font-size: min(12px, 1vw);
@@ -39,4 +38,13 @@ html {
   color: $greyLight-3;
   font-size: 1.4rem;
   text-align: center;
+}
+.info > a {
+  color: $roselyA;
+  font-weight: bolder;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $roselyB;
+  }
 }
