@@ -1,0 +1,27 @@
+/*  FORM  */
+.form {
+  &__input {
+    width: 80rem;
+    height: 15rem;
+    resize: none;
+    border: none;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    padding: 1.4rem;
+    box-shadow: $inner-shadow;
+    background: none;
+    font-family: inherit;
+    color: $greyDark;
+    overflow: auto;
+    outline: none;
+    margin: 3rem 3rem 0 3rem;
+
+    &::placeholder {
+      color: $greyLight-3;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

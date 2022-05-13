@@ -1,0 +1,9 @@
+
+node_modules/
+package-lock.js
+.gitignore.bak
+
+pages/
+dist/
+
+pages
