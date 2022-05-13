@@ -47,7 +47,7 @@ export default class Keyboard {
       }
       e.preventDefault();
     });
-    document.addEventListener('mouseup', (e) => {
+    this.element.addEventListener('mouseup', (e) => {
       const key = e.target.closest('.btn');
       if (
         this.mousePressedCode.slice(0, 5) === 'Shift'
@@ -78,6 +78,13 @@ export default class Keyboard {
     document.querySelector('.link--switchlang').addEventListener('click', () => {
       this.switchLang();
       this.initLang();
+    });
+    this.element.addEventListener('dblclick', (e) => {
+      const key = e.target.closest('.btn');
+      if (key && key.id.slice(0, 5) === 'Shift') {
+        this.activatekey(key.id);
+        e.preventDefault();
+      }
     });
   }
 
