@@ -79,7 +79,7 @@ export default class Keyboard {
       this.switchLang();
       this.initLang();
     });
-    this.element.addEventListener('dblclick', (e) => {
+    this.element.addEventListener('contextmenu', (e) => {
       const key = e.target.closest('.btn');
       if (key && key.id.slice(0, 5) === 'Shift') {
         this.activatekey(key.id);

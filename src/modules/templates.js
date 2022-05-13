@@ -7,7 +7,7 @@ const bodyTemplate = {
     </div>
     <div class="info">Клавиатура создана в операционной системе Windows.<br>
       Чтобы <a href="#" class="link link--switchlang">переключить язык</a> комбинация: левыe shift + alt;<br>
-      Зажать shift:  двойной клик лкм<br>
+      Зажать shift:  пкм или долгое нажание для мобильной версии<br>
       <br>
       Иконочные шрифты только для английской раскладки.</div>
     <footer class="footer ">
