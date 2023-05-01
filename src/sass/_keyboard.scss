@@ -43,6 +43,9 @@
   color: $primary;
   font-weight: bolder;
 }
+.btn--fake {
+  visibility: hidden;
+}
 .btn--Func {
   font-size: 1.2rem;
   font-weight: bold;
