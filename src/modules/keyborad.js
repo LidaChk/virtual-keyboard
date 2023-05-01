@@ -1,7 +1,7 @@
-import Button from './btn';
+import Button from './model/button';
 import layouts from './layouts';
 import keyboardMap from './keyboardmap';
-import bodyTemplate from './templates';
+import bodyTemplate from './model/templates';
 
 export default class Keyboard {
   constructor() {

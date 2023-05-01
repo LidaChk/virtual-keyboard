@@ -1,3 +1,2 @@
 import './sass/main.scss';
-
-import './modules/keyborad';
+import './modules/app';

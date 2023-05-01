@@ -1,4 +1,8 @@
 module.exports = {
+  plugins: [
+    'prettier',
+    'unicorn',
+  ],
   env: {
     browser: true,
     es2021: true,
