@@ -1,4 +1,8 @@
 /* FOOTER */
+.footer > *{
+   box-sizing: border-box;
+}
+
 ol,
 ul,
 a,
@@ -19,13 +23,18 @@ p {
   display: flex;
   flex-direction: row;
   align-content: center;
-  gap: 4rem;
+  gap: 2rem;
+  > li {
+    max-width: 8rem;
+    text-align: center;
+  }
 }
 
 .footer-item {
   color: $rosely8;
   transition: all 0.3s;
   transition: all 0.3s ease;
+  max-width: 8rem;
 }
 
 .footer-text {
@@ -34,6 +43,8 @@ p {
 }
 
 .footer-svg {
+  max-height: 2.5rem;
+  max-width: fit-content;
   padding-left: 0.5rem;
   opacity: 0.5;
   filter: invert(47%) sepia(10%) saturate(821%) hue-rotate(267deg)
@@ -46,5 +57,5 @@ p {
 
 .footer-svg.footer-svg--rose {
   filter: none;
-  height: 2.5rem;
+  max-width: 2.5rem;
 }
