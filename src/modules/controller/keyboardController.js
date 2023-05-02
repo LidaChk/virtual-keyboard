@@ -12,7 +12,7 @@ class KeyboardController {
   }
 
   init() {
-    this.view.syncLangShift(this.model.lang, this.model.shifted);
+    this.view.syncLangShift(this.model.lang, this.model.shiftKey, this.model.capsKey);
   }
 
   handleKeyPress(keyId, isKey, isMnpKey) {
@@ -21,7 +21,7 @@ class KeyboardController {
       this.sendEventToTextarea(keyId, isKey, isMnpKey);
     }
     this.view.activateBtns(this.model.currentKeys);
-    this.view.syncLangShift(this.model.lang, this.model.shifted);
+    this.view.syncLangShift(this.model.lang, this.model.shiftKey, this.model.capsKey);
   }
 
   handleKeyRelease(keyId, src) {
@@ -31,7 +31,7 @@ class KeyboardController {
     this.model.releaseKey(keyId, src);
 
     this.view.deactivateBtns(this.model.currentKeys);
-    this.view.syncLangShift(this.model.lang, this.model.shifted);
+    this.view.syncLangShift(this.model.lang, this.model.shiftKey, this.model.capsKey);
   }
 
   addEvents() {
@@ -95,7 +95,7 @@ class KeyboardController {
 
   switchLang() {
     this.model.switchLang();
-    this.view.syncLangShift(this.model.lang, this.model.shifted);
+    this.view.syncLangShift(this.model.lang, this.model.shiftKey, this.model.capsKey);
   }
 
   sendEventToTextarea(keyId, isKey, isMnpKey) {
@@ -110,6 +110,7 @@ class KeyboardController {
       this.model.lang,
       isKey,
       isMnpKey,
+      this.view.btns[keyId]?.element.innerHTML,
     );
 
     this.textarea.dispatchEvent(vkbEvent.customEvent);

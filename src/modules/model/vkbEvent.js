@@ -9,6 +9,7 @@ class VkbEvent {
     lang = 'Eng',
     isKey = false,
     isMnpKey = false,
+    value = '',
   ) {
     this.customEvent = new CustomEvent('virtualKeyboardEvent', {
       detail: {
@@ -21,6 +22,7 @@ class VkbEvent {
         lang,
         isKey,
         isMnpKey,
+        value,
       },
       bubbles: false,
       cancelable: true,

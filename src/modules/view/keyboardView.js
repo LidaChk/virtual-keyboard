@@ -32,22 +32,24 @@ class KeyboardView {
     this.state = 'initialized';
   }
 
-  syncLangShift(lang, shifted) {
-    if (this.element.dataset.lang !== lang || this.element.dataset.shifted !== shifted.toString()) {
-      this.element.dataset.shifted = shifted.toString();
+  syncLangShift(lang, shiftKey, capsKey) {
+    if (this.element.dataset.lang !== lang || this.element.dataset.shiftKey !== shiftKey.toString()
+      || this.element.dataset.capsKey !== capsKey.toString()) {
+      this.element.dataset.shifted = shiftKey.toString();
+      this.element.dataset.capsKey = capsKey.toString();
       this.element.dataset.lang = lang;
-      const lay = layouts.find(
-        (l) => l.lang === lang && l.shifted === shifted,
+      const layKeys = layouts.find(
+        (l) => l.lang === lang && l.shifted === shiftKey,
       ).layout;
       const keys = Object.keys(this.btns);
       keys
         .filter((b) => this.btns[b].type === 'key')
         .forEach((b) => {
-          if (this.capsed && shifted && b.slice(0, 3) === 'Key') {
-            this.btns[b].changeLabel(lay[b].toLowerCase());
-          } else if (this.capsed && !shifted && b.slice(0, 3) === 'Key') {
-            this.btns[b].changeLabel(lay[b].toUpperCase());
-          } else this.btns[b].changeLabel(lay[b]);
+          if (capsKey && shiftKey && b.slice(0, 3) === 'Key') {
+            this.btns[b].changeLabel(layKeys[b].toLowerCase());
+          } else if (capsKey && !shiftKey && b.slice(0, 3) === 'Key') {
+            this.btns[b].changeLabel(layKeys[b].toUpperCase());
+          } else this.btns[b].changeLabel(layKeys[b]);
         });
     }
   }

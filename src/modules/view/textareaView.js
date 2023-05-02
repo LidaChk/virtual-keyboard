@@ -21,19 +21,13 @@ export default class Textarea {
     document.querySelector('.form').appendChild(this.element);
   }
 
-  updateValueWithKey(key, shifted, lang) {
+  updateValueWithKey(key, shifted, lang, keyValue) {
     this.element.focus();
     const { value } = this.element;
     const start = this.element.selectionStart;
     const end = this.element.selectionEnd;
-    const lay = layouts.find(
-      (l) => l.lang === lang && l.shifted === shifted,
-    ).layout;
-
-    this.element.value = `${value.slice(0, start)}${lay[key]}${value.slice(
-      end,
-    )}`;
-    this.element.selectionEnd = start + lay[key].length;
+    this.element.value = `${value.slice(0, start)}${keyValue}${value.slice(end)}`;
+    this.element.selectionEnd = start + keyValue.length;
   }
 
   updateValueWithMnpKey(key) {
