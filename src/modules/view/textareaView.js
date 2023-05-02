@@ -11,6 +11,7 @@ export default class Textarea {
     textarea.setAttribute('placeholder', 'Type anything...');
     textarea.setAttribute('autofocus', 'true');
     textarea.setAttribute('tabindex', '-1');
+    textarea.setAttribute('spellcheck', 'false');
 
     this.element = textarea;
     document.querySelector('.form').appendChild(this.element);

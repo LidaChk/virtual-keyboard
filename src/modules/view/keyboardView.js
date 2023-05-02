@@ -54,12 +54,12 @@ class KeyboardView {
 
   activateBtns(curBtns) {
     curBtns.forEach((keyId) => {
-      this.btns[keyId].addClass('btn--active');
+      this.btns[keyId]?.addClass('btn--active');
     });
   }
 
   deactivateBtns(curBtns) {
-    Object.keys(this.btns).forEach((key) => {
+    Object.keys(this.btns)?.forEach((key) => {
       if (!curBtns.has(key)) this.btns[key].removeClass('btn--active');
     });
   }
