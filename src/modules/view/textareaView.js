@@ -1,5 +1,3 @@
-import layouts from '../layouts';
-
 export default class Textarea {
   constructor() {
     this.cols = 80;
