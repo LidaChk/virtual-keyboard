@@ -1,4 +1,4 @@
-@import "./_vars.scss";
+@import './_vars.scss';
 
 *,
 *::before,
@@ -14,7 +14,7 @@ html {
   overflow-y: scroll;
   background: $greyLight-1;
 
-  font-family: "Overpass Mono", monospace;
+  font-family: 'Overpass Mono', monospace;
 }
 
 .container {
@@ -35,9 +35,14 @@ html {
   overflow: hidden;
 }
 .info {
-  color: $greyLight-3;
+  max-width: 80rem;
+  color: darken($greyLight-3, 10%);
   font-size: 1.4rem;
   text-align: center;
+}
+.info > li {
+  padding-top: 1rem;
+  max-width: 70rem;
 }
 .info > a {
   color: $roselyA;

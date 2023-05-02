@@ -1,3 +1,5 @@
+import { notFuncKeys, manipulatingKeys } from '../keyboardmap';
+
 class Keyboard {
   constructor() {
     // TODO: определение капслока
@@ -15,6 +17,9 @@ class Keyboard {
     this.shiftKey = false;
     this.capsKey = false;
     this.shifted = false;
+
+    this.notFuncKeys = new Set(notFuncKeys);
+    this.manipulatingKeys = new Set(manipulatingKeys);
 
     this.#updateLocalStorage();
   }
@@ -149,6 +154,13 @@ class Keyboard {
 
   isShifted() {
     return this.currentKeys.has('ShiftLeft') || this.currentKeys.has('ShiftRight');
+  }
+
+  checkStackedKeys() {
+    [...this.currentKeys].forEach((key) => {
+      if (this.manipulatingKeys.has(key)) this.currentKeys.delete(key);
+      if (this.notFuncKeys.has(key)) this.currentKeys.delete(key);
+    });
   }
 }
 

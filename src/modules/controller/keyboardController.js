@@ -34,17 +34,26 @@ class KeyboardController {
     this.view.syncLangShift(this.model.lang, this.model.shiftKey, this.model.capsKey);
   }
 
+  checkStackedKeys() {
+    this.model.checkStackedKeys();
+    this.view.deactivateBtns(this.model.currentKeys);
+    this.view.syncLangShift(this.model.lang, this.model.shiftKey, this.model.capsKey);
+  }
+
   addEvents() {
     const keyboard = this.view.element;
     keyboard.addEventListener('mousedown', (e) => {
       if (e.button === 0) {
         const key = e.target.closest('.btn');
+        clearTimeout(this.checkTimeout);
         if (key) {
           this.handleKeyPress(
             key.id,
             this.notFuncKeys.has(key.id),
             this.manipulatingKeys.has(key.id),
           );
+          // фикс увода нажатой мышки с кнопки вдаль
+          this.checkTimeout = setTimeout(this.checkStackedKeys.bind(this));
         }
         e.preventDefault();
       }

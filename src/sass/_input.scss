@@ -26,8 +26,26 @@
       outline: none;
     }
     &::selection {
-      background:$rosely9 ;
-      color:$rosely3 ;
+      background: $rosely9;
+      color: $rosely3;
+    }
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: $rosely7;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: $rosely5;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: $rosely5;
+    }
+    &::-webkit-scrollbar-thumb:active {
+      background: $rosely9;
     }
   }
 }
