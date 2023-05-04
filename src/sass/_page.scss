@@ -1,0 +1,58 @@
+@import './_vars.scss';
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: min(12px, 1vw);
+  overflow-y: scroll;
+  background: $greyLight-1;
+
+  font-family: 'Overpass Mono', monospace;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $greyLight-1;
+}
+
+.components {
+  border-radius: 3rem;
+  box-shadow: 0.8rem 0.8rem 1.4rem $greyLight-2, -0.2rem -0.2rem 1.8rem $white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  overflow: hidden;
+}
+.info {
+  max-width: 80rem;
+  color: darken($greyLight-3, 10%);
+  font-size: 1.4rem;
+  text-align: center;
+}
+.info li {
+  padding-top: 1rem;
+  max-width: 70rem;
+}
+.info a {
+  color: $roselyA;
+  font-weight: bolder;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: $roselyB;
+  }
+}
+body::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,61 @@
+/* FOOTER */
+.footer > *{
+   box-sizing: border-box;
+}
+
+ol,
+ul,
+a,
+p {
+  list-style: none;
+  text-decoration: none;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-list {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 2rem;
+  > li {
+    max-width: 8rem;
+    text-align: center;
+  }
+}
+
+.footer-item {
+  color: $rosely8;
+  transition: all 0.3s;
+  transition: all 0.3s ease;
+  max-width: 8rem;
+}
+
+.footer-text {
+  padding: 0.5rem;
+  opacity: 0.5;
+}
+
+.footer-svg {
+  max-height: 2.5rem;
+  max-width: fit-content;
+  padding-left: 0.5rem;
+  opacity: 0.5;
+  filter: invert(47%) sepia(10%) saturate(821%) hue-rotate(267deg)
+    brightness(89%) contrast(92%);
+}
+
+.footer-svg:hover {
+  opacity: 0.9;
+}
+
+.footer-svg.footer-svg--rose {
+  filter: none;
+  max-width: 2.5rem;
+}
