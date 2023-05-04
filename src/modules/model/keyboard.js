@@ -160,6 +160,7 @@ class Keyboard {
     [...this.currentKeys].forEach((key) => {
       if (this.manipulatingKeys.has(key)) this.currentKeys.delete(key);
       if (this.notFuncKeys.has(key)) this.currentKeys.delete(key);
+      if (key.includes('Meta')) this.currentKeys.delete(key);
     });
   }
 }

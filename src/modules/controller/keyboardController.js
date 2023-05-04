@@ -72,7 +72,7 @@ class KeyboardController {
     document.addEventListener('keydown', (e) => {
       if (e.code.includes('Numpad')) {
         e.preventDefault();
-      } else {
+      } else if (this.view.btns[e.code] !== undefined) {
         this.handleKeyPress(
           e.code,
           this.notFuncKeys.has(e.code),
@@ -119,7 +119,7 @@ class KeyboardController {
       this.model.lang,
       isKey,
       isMnpKey,
-      this.view.btns[keyId]?.element.innerHTML,
+      this.view.btns[keyId]?.element.dataset.printValue || this.view.btns[keyId]?.element.innerHTML,
     );
 
     this.textarea.dispatchEvent(vkbEvent.customEvent);

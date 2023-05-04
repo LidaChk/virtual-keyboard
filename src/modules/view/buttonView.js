@@ -1,11 +1,12 @@
 export default class Button {
-  constructor(code, type = 'key', width = 1, label = '') {
+  constructor(code, type = 'key', width = 1, label = '', printValue = '') {
     this.element = document.createElement('div');
     this.element.classList.add('btn');
     this.element.classList.add(`btn--${type}`);
     if (code === 'letters') this.element.classList.add('btn--magic');
     this.element.id = code;
     this.element.innerHTML = label;
+    if (printValue) this.element.dataset.printValue = printValue || label;
     if (width > 1) this.element.style.flexGrow = width;
 
     this.code = code;
